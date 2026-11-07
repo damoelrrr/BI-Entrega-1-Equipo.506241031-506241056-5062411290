@@ -1,7 +1,7 @@
 # RetailBI — Business Intelligence
 
 **Proyecto académico de Inteligencia de Negocios (BI)**  
-**Repositorio de trabajo:** `BI-Entrega-1-Equipo.506241931-506241056-506241129`
+**Repositorio de trabajo:** `BI-Entrega-2-Equipo.506241931-506241056-506241129`
 
 RetailBI implementa una solución de Business Intelligence para una empresa minorista ficticia con cinco tiendas en Bogotá, Colombia. El proyecto integra fuentes públicas y datos sintéticos, prepara la información mediante procesos ETL de Pentaho Data Integration, almacena los datos en PostgreSQL bajo un modelo dimensional en estrella y permite consultar indicadores comerciales mediante un tablero de Power BI.
 
