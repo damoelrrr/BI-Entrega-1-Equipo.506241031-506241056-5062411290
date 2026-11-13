@@ -1,0 +1,10 @@
+# Entorno usado para ejecutar el notebook (Python 3.12)
+pandas==3.0.6
+numpy==2.5.4
+scikit-learn==1.9.1
+matplotlib==3.11.2
+# Solo si se consulta PostgreSQL (variable RETAILBI_PG_URL); sin ella el notebook lee dataset.csv
+sqlalchemy>=2.0
+psycopg2-binary>=2.9
+# Para abrir y ejecutar el notebook
+jupyterlab>=4.0
