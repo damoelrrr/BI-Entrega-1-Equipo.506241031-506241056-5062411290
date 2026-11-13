@@ -1,9 +1,17 @@
 # RetailBI — Business Intelligence
 
 **Proyecto académico de Inteligencia de Negocios (BI)**  
-**Repositorio de trabajo:** `BI-Entrega-2-Equipo.506241931-506241056-506241129`
+**Repositorio de trabajo:** [`damoelrrr/BI-Entrega-2-Equipo.506241031-506241056-506241129`](https://github.com/damoelrrr/BI-Entrega-2-Equipo.506241031-506241056-506241129)
 
 RetailBI implementa una solución de Business Intelligence para una empresa minorista ficticia con cinco tiendas en Bogotá, Colombia. El proyecto integra fuentes públicas y datos sintéticos, prepara la información mediante procesos ETL de Pentaho Data Integration, almacena los datos en PostgreSQL bajo un modelo dimensional en estrella y permite consultar indicadores comerciales mediante un tablero de Power BI.
+
+## Entregas
+
+| Entrega | Contenido | Documento |
+|---|---|---|
+| 1 | Diagnóstico, estrategia y diseño del modelo dimensional | — |
+| 2 | Data warehouse en PostgreSQL, ETL con PDI y tablero de Power BI | `docs/entregas/` |
+| 3 | Modelo predictivo de unidades vendidas (pregunta P4 de la Entrega 1) y despliegue de sus predicciones en el DW y en el tablero | `docs/entregas/BI-Entrega-3-Equipo506241031.pdf` |
 
 > **Alcance de los datos:** las ventas de F3 son sintéticas y se utilizan con fines académicos. Los resultados no representan ventas reales de una empresa.
 
@@ -11,11 +19,9 @@ RetailBI implementa una solución de Business Intelligence para una empresa mino
 
 | Integrante | Código |
 |---|---:|
-| Juan David Pardo Gutierrez | 506241031* |
+| Juan David Pardo Gutierrez | 506241031 |
 | Linda Valentina Quintero Quiroga | 506241056 |
 | Daniel Felipe Rodríguez Angulo | 506241129 |
-
-\* Verificar el primer código antes de la entrega final: el nombre solicitado para el repositorio contiene `506241931`, mientras que la portada del informe de Entrega 2 contiene `506241031`.
 
 ## Objetivo
 
@@ -56,18 +62,23 @@ Los scripts de creación se encuentran en `DW/ddl/`. Las consultas para concilia
 ## Estructura del repositorio
 
 ```text
-RETAILBI-Business_Intelligence/
+BI-Entrega-2-Equipo.506241031-506241056-506241129/
 ├── README.md
+├── modelo/                  # Entrega 3: modelo predictivo
+│   ├── modelo_prediccion_unidades.ipynb   # Notebook de principio a fin
+│   ├── extraccion.sql       # Consulta que extrae el conjunto de datos del DW
+│   └── requirements.txt     # Librerías y versiones
 ├── DW/
-│   ├── ddl/                 # Creación del esquema, dimensiones y hechos
-│   └── conciliacion/        # Consultas de conteo, totales e integridad
+│   ├── ddl/                 # Esquema, dimensiones, hechos y pred_ventas_unidades (09)
+│   └── conciliacion/        # Conteos, totales, integridad y verificación de predicciones (06)
 ├── ETL/
 │   ├── trabajos/            # job_carga_retailbi.kjb
 │   ├── transformaciones/    # Transformaciones .ktr
 │   ├── referencia/          # Referencia técnica
 │   └── README.md            # Configuración y ejecución del ETL
 ├── dashboard/
-│   └── RetailBI_tablero.pbix
+│   ├── RetailBI_tablero.pbix   # Incluye la página de predicciones (Entrega 3)
+│   └── capturas/               # Capturas del tablero, incluida la página de predicciones
 ├── datos/
 │   ├── raw/                 # Fuentes originales
 │   ├── inconsistencias/     # Copia de F3 con inconsistencias de prueba
@@ -76,7 +87,8 @@ RETAILBI-Business_Intelligence/
 │   ├── diccionarios/
 │   └── descarga.md          # Procedencia y trazabilidad
 └── docs/
-    └── diagramas/           # Diagramas de arquitectura y modelo
+    ├── diagramas/           # Diagramas de arquitectura y modelo
+    └── entregas/            # PDF de cada entrega
 ```
 
 ## Requisitos previos
@@ -86,6 +98,7 @@ RETAILBI-Business_Intelligence/
 3. Java compatible con la instalación de PDI.
 4. Driver JDBC de PostgreSQL disponible para PDI (el proyecto se configuró con `postgresql-42.2.23.jar`).
 5. Power BI Desktop para abrir el tablero.
+6. Para el modelo predictivo (Entrega 3): Python 3 con Jupyter, o Google Colab, y las librerías de `modelo/requirements.txt`.
 
 Las rutas y los nombres de carpetas distinguen mayúsculas y minúsculas en sistemas Linux. Utiliza exactamente `DW/` y `ETL/`.
 
@@ -96,11 +109,9 @@ Las rutas y los nombres de carpetas distinguen mayúsculas y minúsculas en sist
 Clona el repositorio o descarga el ZIP y conserva la estructura de carpetas:
 
 ```bash
-git clone <URL_DEL_REPOSITORIO>
-cd RETAILBI-Business_Intelligence
+git clone https://github.com/damoelrrr/BI-Entrega-2-Equipo.506241031-506241056-506241129.git
+cd BI-Entrega-2-Equipo.506241031-506241056-506241129
 ```
-
-Sustituye `<URL_DEL_REPOSITORIO>` por la URL definitiva del repositorio publicado por el equipo.
 
 ### 2. Crear la base de datos
 
@@ -121,6 +132,7 @@ DW/ddl/05_dim_descuento.sql
 DW/ddl/06_fact_ventas.sql
 DW/ddl/07_ctx_emc_comercio_minorista.sql
 DW/ddl/08_ctx_empresas_bogota.sql
+DW/ddl/09_pred_ventas_unidades.sql   # Entrega 3: tabla de predicciones
 ```
 
 El script `02_dim_fecha.sql` genera la dimensión de fechas desde el 1 de enero de 2023 hasta el 31 de diciembre de 2025.
@@ -190,10 +202,32 @@ Ejecuta las consultas de `DW/conciliacion/` en orden. Estos archivos permiten re
 - `03_integridad_fact_ventas.sql`
 - `04_totales_fuente_f3_duckdb.sql`
 - `05_verificacion_preguntas_negocio.sql`
+- `06_verificacion_predicciones.sql` (Entrega 3; ejecutar después del paso 6)
 
-### 6. Abrir el tablero
+### 6. Ejecutar el modelo predictivo (Entrega 3)
 
-Abre `dashboard/RetailBI_tablero.pbix` con Power BI Desktop. Si Power BI solicita credenciales o la ubicación del servidor, configura la conexión hacia la instancia PostgreSQL local y la base `retailbi_dw`, utilizando el esquema `dw`. Actualiza los datos después de confirmar que la carga ETL terminó correctamente.
+El modelo responde la pregunta P4 de la Entrega 1: cuántas unidades de cada producto se venderán en cada tienda el próximo mes. Es un problema de regresión; se comparan una regresión lineal y un bosque aleatorio, entrenados con abril de 2023 a diciembre de 2024 y evaluados con los 12 meses de 2025. Se eligió la regresión lineal (MAE = 7,22 unidades por tienda, producto y mes).
+
+1. Crea un entorno e instala las librerías:
+
+   ```bash
+   cd modelo
+   python -m venv .venv
+   .venv\Scripts\activate          # Windows  (Linux/macOS: source .venv/bin/activate)
+   pip install -r requirements.txt
+   ```
+
+2. Asegúrate de que `retailbi_dw` está cargada (pasos 2 a 5) y de que existe la tabla `dw.pred_ventas_unidades` (`DW/ddl/09_pred_ventas_unidades.sql`).
+3. Abre `modelo/modelo_prediccion_unidades.ipynb` con Jupyter (`jupyter notebook`) y ejecuta todas las celdas en orden (*Run All*). El notebook se conecta a PostgreSQL con SQLAlchemy usando los mismos parámetros de la tabla del paso 3; la contraseña se escribe localmente y no se guarda en el repositorio.
+4. El notebook ejecuta la consulta de `modelo/extraccion.sql` (5.400 registros: 5 tiendas × 30 productos × 36 meses), prepara los datos, entrena y evalúa los dos algoritmos y escribe las 1.800 predicciones del modelo elegido en `dw.pred_ventas_unidades`.
+5. Comprueba la carga con `DW/conciliacion/06_verificacion_predicciones.sql`: debe devolver 1.800 filas, MAE 7,22 y 0 predicciones sin dimensión.
+
+### 7. Abrir el tablero y ver las predicciones
+
+Abre `dashboard/RetailBI_tablero.pbix` con Power BI Desktop. Si Power BI solicita credenciales o la ubicación del servidor, configura la conexión hacia la instancia PostgreSQL local y la base `retailbi_dw`, utilizando el esquema `dw`. Actualiza los datos después de confirmar que la carga ETL y el notebook terminaron correctamente.
+
+- Páginas 1 y 2: preguntas de negocio P0 a P3 (Entrega 2).
+- Página 3, «Predicción de unidades vendidas frente a valores reales (2025)»: unidades reales frente a pronosticadas y MAE, por mes, tienda y producto, con segmentadores de tienda y categoría. Lee la tabla `dw.pred_ventas_unidades`, unida a `dim_fecha`, `dim_tienda` y `dim_producto`.
 
 ## Documentación y evidencias
 
@@ -201,6 +235,8 @@ Abre `dashboard/RetailBI_tablero.pbix` con Power BI Desktop. Si Power BI solicit
 - [`datos/descarga.md`](datos/descarga.md): procedencia y trazabilidad de las fuentes.
 - `docs/diagramas/`: diagramas de arquitectura, esquema estrella y modelo físico.
 - `DW/conciliacion/`: consultas SQL para validar la información cargada.
+- `modelo/`: notebook, consulta de extracción y librerías del modelo predictivo.
+- `docs/entregas/`: informes en PDF de cada entrega.
 
 ## Consideraciones
 
