@@ -1,7 +1,7 @@
 # RetailBI — Business Intelligence
 
 **Proyecto académico de Inteligencia de Negocios (BI)**  
-**Repositorio de trabajo:** [`damoelrrr/BI-Entrega-2-Equipo.506241031-506241056-506241129`](https://github.com/damoelrrr/BI-Entrega-2-Equipo.506241031-506241056-506241129)
+**Repositorio de trabajo:** [`damoelrrr/BI-Entrega-3-Equipo.506241031-506241056-506241129`](https://github.com/damoelrrr/BI-Entrega-3-Equipo.506241031-506241056-506241129)
 
 RetailBI implementa una solución de Business Intelligence para una empresa minorista ficticia con cinco tiendas en Bogotá, Colombia. El proyecto integra fuentes públicas y datos sintéticos, prepara la información mediante procesos ETL de Pentaho Data Integration, almacena los datos en PostgreSQL bajo un modelo dimensional en estrella y permite consultar indicadores comerciales mediante un tablero de Power BI.
 
@@ -62,7 +62,7 @@ Los scripts de creación se encuentran en `DW/ddl/`. Las consultas para concilia
 ## Estructura del repositorio
 
 ```text
-BI-Entrega-2-Equipo.506241031-506241056-506241129/
+BI-Entrega-3-Equipo.506241031-506241056-506241129/
 ├── README.md
 ├── modelo/                  # Entrega 3: modelo predictivo
 │   ├── modelo_prediccion_unidades.ipynb   # Notebook de principio a fin
@@ -109,8 +109,8 @@ Las rutas y los nombres de carpetas distinguen mayúsculas y minúsculas en sist
 Clona el repositorio o descarga el ZIP y conserva la estructura de carpetas:
 
 ```bash
-git clone https://github.com/damoelrrr/BI-Entrega-2-Equipo.506241031-506241056-506241129.git
-cd BI-Entrega-2-Equipo.506241031-506241056-506241129
+git clone https://github.com/damoelrrr/BI-Entrega-3-Equipo.506241031-506241056-506241129.git
+cd BI-Entrega-3-Equipo.506241031-506241056-506241129
 ```
 
 ### 2. Crear la base de datos
